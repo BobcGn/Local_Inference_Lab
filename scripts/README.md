@@ -1,3 +1,28 @@
 # 实验脚本
 
-`download/` 用于版本明确的模型下载脚本，`build/` 用于上游构建复现，`benchmark/` 用于测量和结果整理。当前命令见 [模型下载](../models/README.md)、[MLX 基线](../experiments/01-mlx-baseline/README.md)、[llama.cpp 基线](../experiments/02-llama-metal/README.md) 和 [Windows 验证](../docs/windows-validation.md)。
+这里是未来封装重复手动步骤的位置，不是现成工具集。`download/`、`build/`、`benchmark/` 目前只有占位文件，没有下载器、构建工具、测量程序或统一 CLI；不能从目录名推断已有接口。自动化约束归 [owning SPEC](SPEC.md)，其中推断且未确认的要求仍待维护者审阅。
+
+## 现在如何使用
+
+无需运行本目录中的脚本，也没有脚本输入、输出或依赖可安装。按平台阅读现有手动步骤：
+
+- [模型下载与核验](../models/README.md)、[第三方源码准备](../repos/README.md)：输入身份和本地资产。
+- macOS M5、32 GB 主线：[MLX 基线](../experiments/01-mlx-baseline/README.md)、[llama.cpp 基线](../experiments/02-llama-metal/README.md)。
+- Windows 由朋友独立负责：[CPU 验证](../docs/windows-validation.md)，不视为 macOS 步骤已跨平台验证。
+- 结果按 [测量入口](../benchmarks/README.md) 和 [运行记录模板](../benchmarks/run-template.md) 手动保存；这里没有自动采集或生成报告的能力。
+
+仓库尚无实测证据或自动化实现；执行手动命令的实际日志才是运行状态依据，不把计划中的封装当作已验证功能。
+
+## 如何贡献脚本
+
+只在出现确实重复的操作后添加小范围封装，并同步补本文的使用说明。`download/` 预留给固定版本资产准备，`build/` 预留给上游构建复现，`benchmark/` 预留给测量与结果整理；语言、文件名和参数名不预先规定。
+
+每个新增脚本至少说明：
+
+- 用途、对应实验和 owning spec；工作目录、支持平台、依赖及其版本。
+- 输入：模型／源码身份、实际后端、有效参数与所用固定输入；不得隐藏替换版本。
+- 输出：文件位置、日志和失败标识；测量定义链接 [测量 SPEC](../benchmarks/SPEC.md)，不在脚本说明中另创口径。
+- 副作用：网络下载、更新检出、覆盖、清理、磁盘与大内存操作；不得隐式覆盖已有模型或结果。
+- 一条真实用法、检查输出的方法及实际验证环境；未在 Windows 或 macOS 执行的部分明确标为未验证，失败或部分完成不能报告成功。
+
+仅贡献可审查的代码、说明和可分享证据；不提交密钥、模型、第三方构建产物或无权分享的数据。新增自动化若改变现有契约，先同步 owning spec。
