@@ -1,8 +1,10 @@
 # Independent source checkouts and local model snapshots
 /repos/*
 !/repos/README.md
+!/repos/SPEC.md
 /models/*
 !/models/README.md
+!/models/SPEC.md
 
 # Local environments and caches
 .venv/
