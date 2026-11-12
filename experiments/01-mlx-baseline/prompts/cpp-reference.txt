@@ -1,0 +1,7 @@
+阅读下面的 C++ 函数。
+
+void add(std::vector<int> values) {
+    values.push_back(42);
+}
+
+调用后，调用者的 vector 会发生什么变化？若要修改调用者的 vector，应怎样改函数签名？说明原因。
